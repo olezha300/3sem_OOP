@@ -1,13 +1,23 @@
-#include "../include/lab1.h"
+#include "../include/lab1.hpp"
 
-long long lab1_var17(long long upSpeed, long long downSpeed, long long desiredHeight)
+int lab1_var17(int upSpeed, int downSpeed, int desiredHeight)
 {
-    long long init = 0;
+    int init = 0;
     int count = 0;
     
     while (init != desiredHeight)
     {
+        if (init > desiredHeight)
+        {
+            return -1;
+        }
+
         init += upSpeed;
+        if (init == desiredHeight)
+        {
+            count++;
+            break;
+        }
         init -= downSpeed;
         count++;
     }

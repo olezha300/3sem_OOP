@@ -1,9 +1,9 @@
 #include <iostream>
-#include "src/lab1.cpp"
+#include "include/lab1.hpp"
 
 int main()
 {
-    long long upSpeed, downSpeed, desiredHeight;
+    int upSpeed, downSpeed, desiredHeight;
     
     std::cout << "Enter upSpeed: ";
     std::cin >> upSpeed;
