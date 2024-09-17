@@ -32,3 +32,17 @@ make
 ```
 ./labN/labN_tests
 ```
+
+## Материалы лабораторных работ
+
+<details>
+
+<summary>
+Лабораторная работа №1
+</summary>
+
+- [Условие (вариант 17)](https://drive.google.com/file/d/1IL5MEZCluRGTYTdhtJik5vJMmG_sDyi9/view?usp=sharing)
+- [Решение](https://github.com/olezha300/3sem_OOP/blob/master/lab1/src/lab1.cpp)
+- [Тесты](https://github.com/olezha300/3sem_OOP/blob/master/lab1/tests/lab1_tests.cpp)
+
+</details>
