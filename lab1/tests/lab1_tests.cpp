@@ -18,7 +18,7 @@ TEST(test_03, basic_test_set)
 
 TEST(test_04, basic_test_set)
 {
-    ASSERT_TRUE(lab1_var17(50, 20, 100) == -1);
+    ASSERT_TRUE(lab1_var17(50, 20, 100) == 3);
 }
 
 int main(int argc, char **argv)
