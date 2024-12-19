@@ -40,6 +40,7 @@ if(NOT nlohmann_json_FOUND)
 endif()
 
 # Paths to include and src directories
+set(GTEST_MAIN_LIB GTest::GTest GTest::Main)
 set(INCLUDE_DIR "${CMAKE_SOURCE_DIR}/include")
 set(SRC_DIR "${CMAKE_SOURCE_DIR}/src")
 set(TEST_DIR "${CMAKE_SOURCE_DIR}/tests")
@@ -82,7 +83,7 @@ enable_testing()
 
 function(add_gtest_executable TEST_NAME TEST_SRC)
     add_executable(${TEST_NAME} ${TEST_SRC})
-    target_link_libraries(${TEST_NAME} GTest::GTest GTest::Main lab6_lib)
+    target_link_libraries(${TEST_NAME} PRIVATE ${GTEST_MAIN_LIB} lab6_lib)
     add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
 endfunction()
 
