@@ -2,27 +2,35 @@
 #define HEXAGON_H
 
 #include "figure.h"
-#include <iostream>
+#include <array>
+#include <utility>
 
-
-class Hexagon : public Figure {
+class Hexagon final: public Figure{
 public:
-    Hexagon(std::istream &InputStream);
-
-    virtual ~Hexagon();
-
-    size_t VertexesNumber();
-    double Area();
-    void Print(std::ostream &OutputStream);
-
+    static constexpr int NUM_VERTICES = 6;
 
 private:
-    Point a;
-    Point b;
-    Point c;
-    Point d;
-    Point e;
-    Point f;
+    std::array<std::pair<double, double>, NUM_VERTICES> vertices;
+
+public:
+    Hexagon();
+    explicit Hexagon(const std::array<std::pair<double, double>, NUM_VERTICES>& vertices);
+    Hexagon(const Hexagon& other);
+    Hexagon(Hexagon&& other) noexcept ;
+
+    Hexagon& operator=(const Hexagon& other);
+    Hexagon& operator=(Hexagon&& other) noexcept;
+    Figure& operator=(const Figure& other) override;
+    Figure& operator=(Figure&& other) noexcept override;
+
+    std::pair<double, double> Center() const override;
+    operator double() const override;
+    bool operator==(const Figure& other) const override;
+    void Rotate(double angle);
+
+protected:
+    void printf(std::ostream& os) const override;
+    void readf(std::istream& is) override;
 };
 
 #endif

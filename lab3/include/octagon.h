@@ -2,29 +2,37 @@
 #define OCTAGON_H
 
 #include "figure.h"
-#include <iostream>
+#include <array>
+#include <utility>
 
-
-class Octagon : public Figure {
+class Octagon final: public Figure{
 public:
-    Octagon(std::istream &InputStream);
-
-    virtual ~Octagon();
-
-    size_t VertexesNumber();
-    double Area();
-    void Print(std::ostream &OutputStream);
-
+    static constexpr int NUM_VERTICES = 8;
 
 private:
-    Point a;
-    Point b;
-    Point c;
-    Point d;
-    Point e;
-    Point f;
-    Point g;
-    Point h;
+    std::array<std::pair<double, double>, NUM_VERTICES> vertices;
+
+public:
+    Octagon();
+    explicit Octagon(const std::array<std::pair<double, double>, NUM_VERTICES>& vertices);
+    Octagon(const Octagon& other);
+    Octagon(Octagon&& other) noexcept;
+
+    Octagon& operator=(const Octagon& other);
+    Octagon& operator=(Octagon&& other) noexcept;
+    Figure& operator=(const Figure& other) override;
+    Figure& operator=(Figure&& other) noexcept override;
+
+
+    std::pair<double, double> Center() const override;
+    operator double() const override;
+    bool operator==(const Figure& other) const override;
+
+    void Rotate(double angle);
+
+protected:
+    void printf(std::ostream& os) const override;
+    void readf(std::istream& is) override;
 };
 
 #endif

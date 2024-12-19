@@ -1,42 +1,27 @@
-cmake_minimum_required(VERSION 3.10)
-project(gtest)
+cmake_minimum_required(VERSION 3.14)
+
+project(MyProject)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+include_directories(include)
 
-endif()
+file(GLOB SOURCES "include/*.hpp")
 
-if (WIN32)
-    set(THREADS_PREFER_PTHREAD_FLAG OFF)
-endif()
+add_executable(MyProject main.cpp ${SOURCES})
 
 include(FetchContent)
 FetchContent_Declare(
         googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG v1.15.2
-        TLS_VERIFY false
+        URL https://github.com/google/googletest/archive/refs/tags/release-1.11.0.zip
 )
-
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
-
-add_library(${CMAKE_PROJECT_NAME}_lib INTERFACE)
-target_include_directories(${CMAKE_PROJECT_NAME}_lib INTERFACE
-        src/iterator.h
-        src/memoryResource.h
-        src/stack.h
-)
-
-add_executable(${CMAKE_PROJECT_NAME}_exe main.cpp)
-target_link_libraries(${CMAKE_PROJECT_NAME}_exe PRIVATE ${CMAKE_PROJECT_NAME}_lib)
 
 enable_testing()
 
-add_executable(tests test/tests01.cpp)
-target_link_libraries(tests ${CMAKE_PROJECT_NAME}_lib gtest_main)
+add_executable(MyProjectTests test/test.cpp ${SOURCES})
 
-add_test(NAME MyProjectTests COMMAND tests)
+target_link_libraries(MyProjectTests gtest_main)
+
+add_test(NAME MyProjectTests COMMAND MyProjectTests)
