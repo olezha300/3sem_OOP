@@ -512,3 +512,4 @@ build/*
 *.app
 
 .DS_Store
+cmake-build-debug/

@@ -1,0 +1,49 @@
+cmake_minimum_required(VERSION 3.10)
+project(gtest)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+
+endif()
+
+if (WIN32)
+    set(THREADS_PREFER_PTHREAD_FLAG OFF)
+endif()
+
+include(FetchContent)
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.15.2
+        TLS_VERIFY false
+)
+
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+# Добавляем только заголовочные файлы для интерфейсной библиотеки
+add_library(${CMAKE_PROJECT_NAME}_lib INTERFACE)
+target_include_directories(${CMAKE_PROJECT_NAME}_lib INTERFACE
+        src/point.h
+        src/ifigure.h
+        src/figure.h
+        src/hexagon.h
+        src/octagon.h
+        src/pentagon.h
+        src/figureArray.h
+)
+
+# Ваш основной исполнимый файл
+add_executable(${CMAKE_PROJECT_NAME}_exe main.cpp)
+target_link_libraries(${CMAKE_PROJECT_NAME}_exe PRIVATE ${CMAKE_PROJECT_NAME}_lib)
+
+# Включаем тесты
+enable_testing()
+
+add_executable(tests test/tests01.cpp)
+target_link_libraries(tests ${CMAKE_PROJECT_NAME}_lib gtest_main)
+
+add_test(NAME MyProjectTests COMMAND tests)
