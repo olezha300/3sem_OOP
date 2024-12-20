@@ -56,12 +56,6 @@
       "type": "Knight",
       "x": 49,
       "y": 37
-    },
-    {
-      "name": "Dragon_4",
-      "type": "Dragon",
-      "x": 40,
-      "y": 20
     }
   ]
 }

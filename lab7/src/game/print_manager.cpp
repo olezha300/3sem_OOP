@@ -5,8 +5,7 @@ PrintManager &PrintManager::get() {
     return instance;
 }
 
-void PrintManager::initialize(ptr<WorldConfigurator> &wc,
-                              const ptr<const std::atomic<GameState>> &stop) {
+void PrintManager::initialize(ptr<WorldConfigurator> &wc, const ptr<const std::atomic<GameState>> &stop) {
     std::lock_guard<std::mutex> lock(init_mtx);
     game_state = stop;
     world_conf = wc;
@@ -80,13 +79,11 @@ void PrintManager::print_winners() {
     switch (survivors.size()) {
     case 0:
         std::cout << "No survivors! The battlefield is silent...\n";
-        std::cout << "---------------------------------------------------------"
-                     "----\n";
+        std::cout << "|===========================================================|\n";
         break;
     case 1:
         std::cout << "                *** ULTIMATE WINNER ***              \n";
-        std::cout << "---------------------------------------------------------"
-                     "----\n";
+        std::cout << "|===========================================================|-\n";
         break;
     default:
         std::cout
@@ -94,8 +91,7 @@ void PrintManager::print_winners() {
             << std::endl;
         std::cout << "|                       SURVIVING NPCs ("
                   << survivors.size() << ")                  |\n";
-        std::cout << "---------------------------------------------------------"
-                     "----\n";
+        std::cout << "|===========================================================|\n";
     }
 
     for (const auto &npc : survivors) {
@@ -103,8 +99,7 @@ void PrintManager::print_winners() {
     }
 
     if (survivors.size() > 1) {
-        std::cout << "The battle ends, but the survivors live to fight another "
-                     "day!\n";
+        std::cout << "The battle ends, but the survivors live to fight another day!\n";
     }
 
     std::cout

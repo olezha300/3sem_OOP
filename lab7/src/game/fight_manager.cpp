@@ -5,8 +5,7 @@ FightManager &FightManager::get() {
     return instance;
 }
 
-void FightManager::initialize(ptr<WorldConfigurator> &wc,
-                              const ptr<const std::atomic<GameState>> &stop) {
+void FightManager::initialize(ptr<WorldConfigurator> &wc, const ptr<const std::atomic<GameState>> &stop) {
     std::lock_guard<std::mutex> lock(init_mtx);
     game_state = stop;
     world_conf = wc;

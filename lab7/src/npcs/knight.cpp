@@ -1,7 +1,6 @@
 #include "knight.hpp"
 
-Knight::Knight(const std::string &name, int x, int y)
-    : NPC(KnightType, 'K', name, x, y) {}
+Knight::Knight(const std::string &name, int x, int y) : NPC(KnightType, 'K', name, x, y) {}
 
 ptr<NPC> Knight::create(const std::string &name, int x, int y) {
     return std::static_pointer_cast<NPC>(std::make_shared<Knight>(name, x, y));

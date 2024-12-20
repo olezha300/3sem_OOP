@@ -5,8 +5,7 @@ MoveManager &MoveManager::get() {
     return instance;
 }
 
-void MoveManager::initialize(ptr<WorldConfigurator> &wc,
-                             const ptr<std::atomic<GameState>> &stop) {
+void MoveManager::initialize(ptr<WorldConfigurator> &wc, const ptr<std::atomic<GameState>> &stop) {
     std::lock_guard<std::mutex> lock(init_mtx);
     game_state = stop;
     world_conf = wc;
@@ -17,12 +16,11 @@ void MoveManager::initialize(ptr<WorldConfigurator> &wc,
 void MoveManager::prepare_for_fight() {
     for (auto npc : world_conf->npcs) {
         for (auto other : world_conf->npcs) {
-            if (other != npc && npc->is_alive() && other->is_alive() &&
-                npc->is_close(other)) {
+            if (other != npc && npc->is_alive() && other->is_alive() && npc->is_close(other)) {
                 if (npc->throw_dice() > other->throw_dice()) {
                     FightManager::get().add_event({npc, other});
                 }
-                }
+            }
         }
     }
 }
@@ -32,11 +30,8 @@ void MoveManager::move_npcs() {
     for (auto npc : world_conf->npcs) {
         move_distance = npc->get_move_distance();
         if (npc->is_alive()) {
-            int shift_x =
-                (std::rand() % (2 * move_distance + 1)) - move_distance;
-            int shift_y =
-
-                (std::rand() % (2 * move_distance + 1)) - move_distance;
+            int shift_x = (std::rand() % (2 * move_distance + 1)) - move_distance;
+            int shift_y = (std::rand() % (2 * move_distance + 1)) - move_distance;
             npc->move(shift_x, shift_y, max_x, max_y);
         }
     }
@@ -62,7 +57,6 @@ void MoveManager::update_game_state() {
 void MoveManager::operator()() {
     while (game_state->load() == GameState::Running) {
         move_npcs();
-        // lets fight;
         prepare_for_fight();
         std::this_thread::sleep_for(std::chrono::milliseconds(300));
     }

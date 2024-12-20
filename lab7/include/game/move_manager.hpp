@@ -10,14 +10,9 @@
 #include <thread>
 
 class MoveManager {
-
 public:
-    // Singleton
     static MoveManager &get();
-
-    void initialize(ptr<WorldConfigurator> &wc,
-                    const ptr<std::atomic<GameState>> &stop);
-
+    void initialize(ptr<WorldConfigurator> &wc,const ptr<std::atomic<GameState>> &stop);
     void operator()();
 
 private:

@@ -38,8 +38,7 @@ public:
     static ptr<NpcPropertiesConfig> create_config(const std::string &file_path);
 
 private:
-    static bool file_path_has_extension(const std::string &file_path,
-                                        const std::string &extension);
+    static bool file_path_has_extension(const std::string &file_path, const std::string &extension);
 };
 
 #endif // NPC_PROPERTIES_CONFIG_HPP

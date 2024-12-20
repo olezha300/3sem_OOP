@@ -1,12 +1,9 @@
 #include "field_configs.hpp"
 
-// JsonFieldConfig
-
 JsonFieldConfig::JsonFieldConfig(const std::string &file_path) {
     std::ifstream file(file_path);
     if (!file.is_open()) {
-        throw std::runtime_error("Cannot open configuration file: " +
-                                 file_path);
+        throw std::runtime_error("Cannot open configuration file: " + file_path);
     }
     file >> field_config;
 }
@@ -97,7 +94,6 @@ int JsonFieldConfig::get_field_size_property(const std::string &property) {
     return field_config.at(property).get<int>();
 }
 
-// FieldConfigHandler
 
 ptr<FieldConfig>
 FieldConfigHandler::create_config(const std::string &file_path) {
@@ -108,8 +104,7 @@ FieldConfigHandler::create_config(const std::string &file_path) {
     }
 }
 
-bool FieldConfigHandler::file_path_has_extension(const std::string &file_path,
-                                                 const std::string &extension) {
+bool FieldConfigHandler::file_path_has_extension(const std::string &file_path, const std::string &extension) {
     std::filesystem::path path(file_path);
     return path.extension() == extension;
 }

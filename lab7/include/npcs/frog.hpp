@@ -4,7 +4,6 @@
 #include "npc.hpp"
 
 class Frog : public NPC {
-
 public:
     Frog(const std::string &name, int x, int y);
     static ptr<NPC> create(const std::string &name, int x, int y);

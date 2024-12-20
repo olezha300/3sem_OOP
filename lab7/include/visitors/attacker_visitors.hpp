@@ -17,11 +17,10 @@ protected:
     std::string attacker_type_name;
 
 public:
-    AttackerVisitorWithConfig(ptr<NpcPropertiesConfig> &conf,
-                              const std::string type_name);
+    AttackerVisitorWithConfig(ptr<NpcPropertiesConfig> &conf, const std::string type_name);
 };
 
-// Knight
+
 class KnightAttackerVisitor : public AttackerVisitorWithConfig {
 public:
     KnightAttackerVisitor(ptr<NpcPropertiesConfig> &conf);
@@ -33,7 +32,6 @@ public:
     void visit(const ptr<NPC> &npc) override;
 };
 
-// Frog
 class FrogAttackerVisitor : public AttackerVisitorWithConfig {
 public:
     FrogAttackerVisitor(ptr<NpcPropertiesConfig> &conf);
@@ -45,7 +43,6 @@ public:
     void visit(const ptr<NPC> &npc) override;
 };
 
-// Dragon
 class DragonAttackerVisitor : public AttackerVisitorWithConfig {
 public:
     DragonAttackerVisitor(ptr<NpcPropertiesConfig> &conf);

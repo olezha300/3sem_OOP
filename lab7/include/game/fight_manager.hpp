@@ -1,4 +1,3 @@
-
 #ifndef FIGHT_MANAGER_HPP
 #define FIGHT_MANAGER_HPP
 
@@ -18,10 +17,8 @@ struct FightEvent {
 
 class FightManager {
 public:
-    // Singleton
     static FightManager &get();
-    void initialize(ptr<WorldConfigurator> &wc,
-                    const ptr<const std::atomic<GameState>> &stop);
+    void initialize(ptr<WorldConfigurator> &wc, const ptr<const std::atomic<GameState>> &stop);
     void add_event(FightEvent &&event);
     void operator()();
 
@@ -30,8 +27,8 @@ private:
     ptr<WorldConfigurator> world_conf;
     std::queue<FightEvent> events;
     std::shared_mutex event_mtx;
-
     std::mutex init_mtx;
+
     FightManager() = default;
 
     std::optional<FightEvent> get_event();

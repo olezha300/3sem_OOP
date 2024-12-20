@@ -1,7 +1,5 @@
 #include "observers.hpp"
 
-// TextObserver
-
 TextObserver::TextObserver() {}
 
 ptr<FightObserver> TextObserver::get() {
@@ -10,15 +8,14 @@ ptr<FightObserver> TextObserver::get() {
 }
 
 void TextObserver::on_fight(const ptr<NPC> attacker, const ptr<NPC> defender) {
-    std::cout << std::endl << "Murder --------" << std::endl;
-    std::cout << "killer: ";
+    std::cout << std::endl << "The murder took place." << std::endl;
+    std::cout << "Killer: ";
     attacker->print();
-    std::cout << "victim: ";
+    std::cout << "Victim: ";
     defender->print();
     std::cout << '\n';
 }
 
-// FileObserver
 
 FileObserver::FileObserver() {}
 
@@ -30,8 +27,8 @@ ptr<FightObserver> FileObserver::get() {
 void FileObserver::on_fight(const ptr<NPC> attacker, const ptr<NPC> defender) {
     std::ofstream fs("log.txt", std::ios::app);
     fs << '\n'
-       << "Murder --------" << '\n'
-       << "killer: " << *attacker << '\n'
-       << "victim: " << *defender << '\n';
+       << "The murder took place." << '\n'
+       << "Killer: " << *attacker << '\n'
+       << "Victim: " << *defender << '\n';
     fs.close();
 }

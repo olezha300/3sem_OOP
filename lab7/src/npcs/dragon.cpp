@@ -1,7 +1,6 @@
 #include "dragon.hpp"
 
-Dragon::Dragon(const std::string &name, int x, int y)
-    : NPC(DragonType, 'D', name, x, y) {}
+Dragon::Dragon(const std::string &name, int x, int y) : NPC(DragonType, 'D', name, x, y) {}
 
 ptr<NPC> Dragon::create(const std::string &name, int x, int y) {
     return std::static_pointer_cast<NPC>(std::make_shared<Dragon>(name, x, y));

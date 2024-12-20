@@ -11,8 +11,7 @@
 class PrintManager {
 public:
     static PrintManager &get();
-    void initialize(ptr<WorldConfigurator> &wc,
-                    const ptr<const std::atomic<GameState>> &stop);
+    void initialize(ptr<WorldConfigurator> &wc, const ptr<const std::atomic<GameState>> &stop);
     void operator()();
 
 private:

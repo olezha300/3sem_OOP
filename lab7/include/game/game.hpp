@@ -12,6 +12,10 @@
 #include <thread>
 
 class Game {
+public:
+    Game();
+    void run();
+
 private:
     std::thread fight_thread;
     std::thread move_thread;
@@ -20,10 +24,6 @@ private:
     ptr<WorldConfigurator> world_conf;
     int time_limit;
     void stop();
-
-public:
-    Game();
-    void run();
 };
 
 #endif // GAME_HPP

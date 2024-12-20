@@ -1,18 +1,15 @@
 #ifndef WORLD_CONFIGURATOR_HPP
 #define WORLD_CONFIGURATOR_HPP
 
+#include "npc.hpp"
+#include "field_configs.hpp"
+#include "npc_properties_configs.hpp"
+#include "attacker_visitors.hpp"
+#include "factories.hpp"
 #include <cstdlib>
 #include <filesystem>
 #include <shared_mutex>
 #include <string>
-
-#include "npc.hpp"
-
-#include "field_configs.hpp"
-#include "npc_properties_configs.hpp"
-
-#include "attacker_visitors.hpp"
-#include "factories.hpp"
 
 class WorldConfigurator {
 public:
@@ -26,29 +23,23 @@ public:
     std::vector<ptr<NPC>> npcs;
 
 private:
-    // std::shared_mutex mtx;
-    // npc config
     std::string npc_properties_config_file_path_env = "NPC_PROPERTIES_CONFIG";
     std::string npc_properties_config_file_path;
     ptr<NpcPropertiesConfig> npc_properties_config;
 
-    // field config
     std::string field_config_file_path_env = "FIELD_CONFIG";
     std::string field_config_file_path;
 
     ptr<FieldConfig> field_config;
     std::vector<NpcFieldConfigData> npcs_field_data;
 
-    // field size
     int field_max_x;
     int field_max_y;
 
-    // npc interraction
     std::unordered_map<NpcType, ptr<NpcFactory>> npc_factories;
     ptr<NpcGenerator> npc_generator;
     std::unordered_map<NpcType, ptr<AttackerVisitor>> attacker_visitors;
 
-    // world configurator setup
     std::string get_config_file_path(const std::string &env);
     void setup_npc_properties_config();
     void setup_npc_generator();

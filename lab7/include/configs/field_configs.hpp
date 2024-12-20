@@ -20,7 +20,6 @@ public:
 };
 
 class JsonFieldConfig : public FieldConfig {
-
 public:
     explicit JsonFieldConfig(const std::string &file_path);
     static ptr<FieldConfig> create(const std::string &file_path);
@@ -42,8 +41,7 @@ public:
     static ptr<FieldConfig> create_config(const std::string &file_path);
 
 private:
-    static bool file_path_has_extension(const std::string &file_path,
-                                        const std::string &extension);
+    static bool file_path_has_extension(const std::string &file_path, const std::string &extension);
 };
 
 #endif // FIELD_CONFIG_HPP

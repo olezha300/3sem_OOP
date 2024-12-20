@@ -1,7 +1,6 @@
 #include "frog.hpp"
 
-Frog::Frog(const std::string &name, int x, int y)
-    : NPC(FrogType, 'F', name, x, y) {}
+Frog::Frog(const std::string &name, int x, int y) : NPC(FrogType, 'F', name, x, y) {}
 
 ptr<NPC> Frog::create(const std::string &name, int x, int y) {
     return std::static_pointer_cast<NPC>(std::make_shared<Frog>(name, x, y));

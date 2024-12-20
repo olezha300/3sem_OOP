@@ -1,11 +1,9 @@
 #include "npc_properties_configs.hpp"
 
-// JsonNpcPropertiesConfig
 JsonNpcPropertiesConfig::JsonNpcPropertiesConfig(const std::string &file_path) {
     std::ifstream file(file_path);
     if (!file.is_open()) {
-        throw std::runtime_error("Cannot open configuration file: " +
-                                 file_path);
+        throw std::runtime_error("Cannot open configuration file: " + file_path);
     }
     file >> npc_config;
 }
@@ -45,8 +43,7 @@ JsonNpcPropertiesConfig::get_enemies(const std::string &npc_type_name) {
     check_for_npc_in_config(npc_type_name);
     const auto &npc_data = npc_config.at(npc_type_name);
     if (!npc_data.contains("enemies") || !npc_data["enemies"].is_array()) {
-        throw std::runtime_error("Missing or invalid 'enemies' for NPC: " +
-                                 npc_type_name);
+        throw std::runtime_error("Missing or invalid 'enemies' for NPC: " + npc_type_name);
     }
 
     std::unordered_set<NpcType> enemies;
@@ -67,12 +64,9 @@ JsonNpcPropertiesConfig::get_enemies(const std::string &npc_type_name) {
 void JsonNpcPropertiesConfig::check_for_npc_in_config(
     const std::string &npc_type_name) {
     if (!npc_config.contains(npc_type_name)) {
-        throw std::runtime_error("NPC type not found in configuration: " +
-                                 npc_type_name);
+        throw std::runtime_error("NPC type not found in configuration: " + npc_type_name);
     }
 }
-
-// NpcPropertiesConfigHandler
 
 ptr<NpcPropertiesConfig>
 NpcPropertiesConfigHandler::create_config(const std::string &file_path) {

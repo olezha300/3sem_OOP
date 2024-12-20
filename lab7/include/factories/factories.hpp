@@ -19,8 +19,7 @@ class NpcFactoryWithConfig : public NpcFactory {
 public:
     std::string npc_type_name;
 
-    NpcFactoryWithConfig(ptr<NpcPropertiesConfig> &conf,
-                         const std::string type_name);
+    NpcFactoryWithConfig(ptr<NpcPropertiesConfig> &conf,const std::string type_name);
     NpcFactoryWithConfig() = delete;
 
 protected:
@@ -55,8 +54,7 @@ public:
 
     static ptr<NpcGenerator>
     create(std::unordered_map<NpcType, ptr<NpcFactory>> factories);
-    ptr<NPC> create_npc(const NpcType &type, const std::string &name, int x,
-                        int y);
+    ptr<NPC> create_npc(const NpcType &type, const std::string &name, int x, int y);
 
 private:
     std::unordered_map<NpcType, ptr<NpcFactory>> factories;

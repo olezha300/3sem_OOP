@@ -1,7 +1,6 @@
 #include "npc.hpp"
 
-NPC::NPC(NpcType t, const char letter, const std::string &name, int x, int y)
-    : type(t), letter(letter), name(name), x(x), y(y) {}
+NPC::NPC(NpcType t, const char letter, const std::string &name, int x, int y) : type(t), letter(letter), name(name), x(x), y(y) {}
 
 NpcType NPC::get_type() const {
     std::lock_guard<std::mutex> lck(mtx);
@@ -37,8 +36,7 @@ bool NPC::is_close(const ptr<NPC> &other) const {
     auto [other_x, other_y] = other->get_position();
 
     std::lock_guard<std::mutex> lck(mtx);
-    bool close = (std::pow(x - other_x, 2) + std::pow(y - other_y, 2)) <=
-                 std::pow(kill_distance, 2);
+    bool close = (std::pow(x - other_x, 2) + std::pow(y - other_y, 2)) <= std::pow(kill_distance, 2);
     return close;
 }
 
@@ -78,9 +76,7 @@ void NPC::subscribe(const ptr<FightObserver> &observer) {
 
 void NPC::fight_notify(const ptr<NPC> defender) const {
     if (!defender->is_alive()) {
-        for (auto &o : observers)
-            o->on_fight(std::const_pointer_cast<NPC>(shared_from_this()),
-                        defender);
+        for (auto &o : observers) o->on_fight(std::const_pointer_cast<NPC>(shared_from_this()), defender);
     }
 }
 
@@ -91,7 +87,6 @@ void NPC::save(std::ostream &os) {
 }
 
 std::ostream &operator<<(std::ostream &os, NPC &npc) {
-    os << npc.name << " "
-       << "{ x:" << npc.x << ", y:" << npc.y << "} ";
+    os << npc.name << " (x:" << npc.x << ", y:" << npc.y << ")";
     return os;
 }
